@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Experience what it's like to spend the fortune of India's richest cricketers and YouTubers on everyday items and luxury goods with this virtual shopping simulator.">
+    <meta name="keywords" content="Indian celebrities, virtual shopping, spend money simulator, Indian cricketers, Indian YouTubers, celebrity net worth, luxury shopping, virtual spending">
+    <meta name="author" content="Celebrity Money Spender">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moneyspend.free.nf/">
+    <meta property="og:title" content="Spend Indian Celebrity Money | Virtual Shopping Experience">
+    <meta property="og:description" content="Experience what it's like to spend the fortune of India's richest cricketers and YouTubers on everyday items and luxury goods!">
+    <meta property="og:image" content="https://res.cloudinary.com/dghihtaoy/image/upload/v1746420691/3V7iGVV_si9a2d.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://moneyspend.free.nf/">
+    <meta name="twitter:title" content="Spend Indian Celebrity Money | Virtual Shopping Experience">
+    <meta name="twitter:description" content="Experience what it's like to spend the fortune of India's richest cricketers and YouTubers on everyday items and luxury goods!">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dghihtaoy/image/upload/v1746420691/3V7iGVV_si9a2d.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://moneyspend.free.nf/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/svgs/solid/rupee-sign.svg">
+
+    <title>Spend Indian Celebrity Money | Virtual Shopping Experience</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            scroll-behavior: smooth;
+            display: flex; /* Added for sticky footer */
+            flex-direction: column; /* Added for sticky footer */
+            min-height: 100vh; /* Added for sticky footer */
+        }
+        .content-wrapper { /* Added for sticky footer */
+            flex-grow: 1;
+        }
+        .money-display {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 60px; /* Add margin to prevent overlap with social icons */
+        }
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-counter {
+            transition: all 0.2s ease;
+        }
+        .btn-counter:hover {
+            background-color: #e2e8f0;
+        }
+        .btn-counter:active {
+            transform: scale(0.95);
+        }
+        .category-tab.active {
+            border-bottom: 3px solid #4F46E5;
+            color: #4F46E5;
+            font-weight: 600;
+        }
+        .pulse {
+            animation: pulse 1s;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .slide-in { animation: slideIn 0.5s ease-out forwards; }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { opacity: 0; height: 30px; }
+        .custom-number-input { position: relative; }
+        .spent-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            background-color: #4F46E5;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 640px) {
+            .money-display { padding: 0.5rem; margin-top: 50px; }
+            .category-tab { padding: 0.5rem; font-size: 0.875rem; }
+            .product-card { margin-bottom: 1rem; }
+            h1 { font-size: 1.75rem !important; }
+            h2 { font-size: 1.25rem !important; }
+            h3 { font-size: 1.125rem !important; }
+            .btn-counter { width: 2rem !important; height: 2rem !important; }
+            .social-contact { flex-wrap: wrap; justify-content: center; }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+        }
+        @media (hover: none) {
+            .btn-counter { min-height: 44px; min-width: 44px; }
+            input, button { min-height: 44px; }
+        }
+        .share-buttons { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+        .share-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; transition: all 0.3s ease; }
+        .share-btn:hover { transform: scale(1.1); }
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .whatsapp { background-color: #25D366; }
+        .telegram { background-color: #0088cc; }
+        .social-contact { position: absolute; top: 10px; right: 10px; display: none; gap: 10px; z-index: 999; transition: opacity 0.5s ease; opacity: 0; }
+        .social-contact-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .social-contact-icon:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .social-contact-yt { background-color: #FF0000; }
+        .social-contact-fb { background-color: #3b5998; }
+        .social-contact-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-contact-tw { background-color: #1da1f2; }
+        .social-contact-tg { background-color: #0088cc; }
+        .social-contact-wa { background-color: #25D366; }
+        .social-contact-phone { background-color: #00c853; }
+        .hamburger-menu { position: fixed; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 50%; background-color: #4F46E5; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: all 0.3s ease, transform 0.3s ease, opacity 0.3s ease; }
+        .hamburger-menu:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
+        .hamburger-menu.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+        .receipt-scroll-container { max-height: 350px; overflow-y: auto; scroll-behavior: smooth; padding-right: 5px; margin-bottom: 10px; border-radius: 5px; }
+        .receipt-scroll-container::-webkit-scrollbar { width: 6px; }
+        .receipt-scroll-container::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 6px; }
+        .receipt-scroll-container::-webkit-scrollbar-thumb { background-color: #4F46E5; border-radius: 6px; }
+        .receipt-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+        .receipt-table th { position: sticky; top: 0; background-color: white; z-index: 10; padding: 10px 0; border-bottom: 2px solid #e5e7eb; }
+        .receipt-table tr { transition: background-color 0.2s ease; }
+        .receipt-table tr:hover { background-color: #f9fafb; }
+        .receipt-item-row { animation: fadeIn 0.4s ease-in-out; }
+        .share-btn-container { display: flex; flex-direction: column; gap: 10px; }
+        .share-options-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 15px; }
+        .share-btn-icon { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .share-btn-icon span { font-size: 12px; color: #4b5563; }
+        @media (max-width: 640px) {
+            .share-options-grid { grid-template-columns: repeat(3, 1fr); }
+            .receipt-scroll-container { max-height: 250px; }
+        }
+
+        /* NEW FOOTER STYLES */
+        .site-footer {
+            background-color: #e2e8f0; /* Light gray background */
+            padding: 1rem;
+            margin-top: auto; /* Pushes footer to bottom if content is short */
+            border-top: 1px solid #cbd5e1; /* Light border */
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+            justify-content: flex-start; /* Align links to the left */
+            gap: 1rem; /* Spacing between links */
+            font-size: 0.875rem; /* Smaller font size */
+            color: #4a5568; /* Gray text color */
+        }
+        .footer-links a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: #2c5282; /* Darker blue on hover */
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Spend Indian Celebrity Money",
+      "description": "Experience what it's like to spend the fortune of India's richest cricketers and YouTubers on everyday items and luxury goods!",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Hamburger Menu Button -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <i class="fas fa-bars" id="hamburgerIcon"></i>
+    </div>
+
+    <!-- Social Media Contact Icons -->
+    <div class="social-contact" id="socialContact">
+        <a href="https://t.me/+21K5S0jvU8o1OGM1" target="_blank" class="social-contact-icon social-contact-tg" title="Contact on Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61575791023538&mibextid=ZbWKwL" target="_blank" class="social-contact-icon social-contact-fb" title="Contact on Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com/moneyspend77#:~:text=Money%20spend-,%40Moneyspend77,-Get%20verified" target="_blank" class="social-contact-icon social-contact-tw" title="Contact on X"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/@MoneySpend-t3o" target="_blank" class="social-contact-icon social-contact-yt" title="Contact on YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/moneyspend77?igsh=bXI2ZGU4a3VmaHZo" target="_blank" class="social-contact-icon social-contact-ig" title="Contact on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://whatsapp.com/channel/0029Vb6ZDvsHLHQbspog613T" target="_blank" class="social-contact-icon social-contact-wa" title="Contact on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <div class="content-wrapper"> <!-- Wrapper for content to enable sticky footer -->
+        <!-- Welcome screen -->
+        <div id="welcomeScreen" class="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+            <h1 class="text-5xl md:text-6xl font-bold text-indigo-600 mb-6">Spend Indian Celebrity Money</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl">Experience what it's like to spend the fortune of India's richest cricketers and YouTubers on everyday items and luxury goods!</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10 max-w-4xl w-full">
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"><i class="fas fa-user-circle text-4xl text-indigo-500"></i></div>
+                    <h3 class="font-semibold">Select a Celebrity</h3><p class="text-sm text-gray-600">Choose from top cricketers and YouTubers</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"><i class="fas fa-shopping-cart text-4xl text-indigo-500"></i></div>
+                    <h3 class="font-semibold">Browse Products</h3><p class="text-sm text-gray-600">Explore 100+ products across categories</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"><i class="fas fa-rupee-sign text-4xl text-indigo-500"></i></div>
+                    <h3 class="font-semibold">Buy Items</h3><p class="text-sm text-gray-600">Spend crores of rupees in seconds</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center"><i class="fas fa-smile text-4xl text-indigo-500"></i></div>
+                    <h3 class="font-semibold">Have Fun!</h3><p class="text-sm text-gray-600">Experience unlimited virtual shopping</p>
+                </div>
+            </div>
+            <button id="startButton" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-xl shadow-lg transition-all hover:scale-105">
+                Get Started
+            </button>
+        </div>
+
+        <!-- Celebrity selection screen -->
+        <div id="celebrityScreen" class="min-h-screen p-4 hidden">
+            <h1 class="text-4xl font-bold text-center text-indigo-600 mb-10">Choose a Celebrity</h1>
+            <p class="text-center text-lg mb-8">Select whose fortune you want to spend</p>
+            <div class="flex justify-center mb-6">
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                    <button type="button" class="celeb-filter px-4 py-2 text-sm font-medium text-indigo-600 bg-white border border-indigo-200 rounded-l-lg hover:bg-indigo-50 active" data-filter="all">All</button>
+                    <button type="button" class="celeb-filter px-4 py-2 text-sm font-medium text-indigo-600 bg-white border-t border-b border-indigo-200 hover:bg-indigo-50" data-filter="cricketer">Cricketers</button>
+                    <button type="button" class="celeb-filter px-4 py-2 text-sm font-medium text-indigo-600 bg-white border-t border-b border-indigo-200 hover:bg-indigo-50" data-filter="youtuber">YouTubers</button>
+                    <button type="button" class="celeb-filter px-4 py-2 text-sm font-medium text-indigo-600 bg-white border border-indigo-200 rounded-r-lg hover:bg-indigo-50" data-filter="businessman">Businessmen</button>
+                </div>
+            </div>
+            <div id="celebrityGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Celebrity cards will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Main spending screen -->
+        <div id="mainScreen" class="min-h-screen hidden">
+            <!-- Money display -->
+            <div class="money-display p-4">
+                <div class="flex flex-col md:flex-row justify-between max-w-7xl mx-auto">
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <button id="backButton" class="bg-gray-200 hover:bg-gray-300 rounded-full p-2" title="Back to celebrity selection"><i class="fas fa-arrow-left text-gray-700"></i></button>
+                        <div class="flex items-center">
+                            <img id="celebrityAvatar" class="w-12 h-12 rounded-full object-cover border-2 border-indigo-500" src="" alt="Celebrity" loading="lazy">
+                            <div class="ml-3">
+                                <h2 id="celebrityName" class="font-bold text-lg">Celebrity Name</h2>
+                                <p class="text-sm text-gray-600" id="celebrityType">Celebrity Type</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-indigo-600" id="moneyLeft">₹0</div>
+                        <div class="text-sm text-gray-600">Money Left</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-600" id="moneySpent">₹0</div>
+                        <div class="text-sm text-gray-600">Money Spent</div>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-indigo-600 rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+            <!-- Category tabs -->
+            <div class="max-w-7xl mx-auto px-4 mt-6">
+                <div class="flex overflow-x-auto space-x-4 pb-2">
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium active" data-category="all">All Products</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="food">Food Items</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="electronics">Electronics</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="cars">Vehicles</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="household">Household Items</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="luxury">Luxury Items</button>
+                    <button class="category-tab whitespace-nowrap px-4 py-2 text-lg font-medium" data-category="clothes">Clothes</button>
+                </div>
+            </div>
+            <!-- Search bar -->
+            <div class="max-w-7xl mx-auto px-4 mt-4">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search products..." class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <i class="fas fa-search absolute right-4 top-3 text-gray-400"></i>
+                </div>
+            </div>
+            <!-- Products grid -->
+            <div class="max-w-7xl mx-auto px-4 mt-6 mb-20">
+                <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product cards will be dynamically inserted here -->
+                </div>
+            </div>
+            <!-- Receipt button -->
+            <div class="fixed bottom-4 right-4">
+                <button id="receiptButton" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full shadow-lg flex items-center">
+                    <i class="fas fa-receipt mr-2"></i><span>View Receipt</span>
+                    <span id="cartCount" class="ml-2 bg-white text-indigo-600 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Receipt modal -->
+        <div id="receiptModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-hidden">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-indigo-50">
+                    <h3 class="text-xl font-bold text-indigo-600">Your Receipt</h3>
+                    <button id="closeReceiptBtn" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="p-4">
+                    <div class="text-center mb-4">
+                        <p class="text-lg font-semibold">How you spent <span id="receiptCelebrityName">Celebrity's</span> money</p>
+                        <p class="text-sm text-gray-600">Total spent: <span id="receiptTotalSpent">₹0</span></p>
+                    </div>
+                    <div class="receipt-scroll-container">
+                        <table class="receipt-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Item</th><th class="text-right">Qty</th><th class="text-right">Price</th><th class="text-right">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receiptItems"><!-- Receipt items will be inserted here --></tbody>
+                        </table>
+                    </div>
+                    <div class="mt-6 border-t border-gray-200 pt-4">
+                        <div class="flex justify-between font-bold">
+                            <span>Grand Total:</span><span id="receiptGrandTotal">₹0</span>
+                        </div>
+                        <div class="mt-2 text-gray-600 text-sm">
+                            <p>Money left: <span id="receiptMoneyLeft">₹0</span></p>
+                            <p>Percentage spent: <span id="receiptPercentageSpent">0%</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-gray-200 bg-gray-50">
+                    <div class="share-btn-container">
+                        <button id="shareBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-full w-full flex items-center justify-center">
+                            <i class="fas fa-share-alt mr-2"></i><span>Share with Friends</span>
+                        </button>
+                        <div id="shareOptions" class="mt-4 hidden">
+                            <p class="text-center text-gray-600 mb-3">Share your shopping experience</p>
+                            <div class="share-options-grid">
+                                <div class="share-btn-icon"><a href="#" id="facebookShare" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a><span>Facebook</span></div>
+                                <div class="share-btn-icon"><a href="#" id="twitterShare" class="share-btn twitter"><i class="fab fa-twitter"></i></a><span>Twitter</span></div>
+                                <div class="share-btn-icon"><a href="#" id="telegramShare" class="share-btn telegram"><i class="fab fa-telegram-plane"></i></a><span>Telegram</span></div>
+                                <div class="share-btn-icon"><a href="#" id="whatsappShare" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a><span>WhatsApp</span></div>
+                                <div class="share-btn-icon"><a href="#" id="instagramShare" class="share-btn instagram"><i class="fab fa-instagram"></i></a><span>Instagram</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No Money Modal -->
+        <div id="noMoneyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-lg max-w-md w-full overflow-hidden">
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-red-100">
+                    <h3 class="text-xl font-bold text-red-600">No Money Left!</h3>
+                    <button id="closeNoMoneyBtn" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="p-6 text-center">
+                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-red-100 rounded-full"><i class="fas fa-rupee-sign text-4xl text-red-500"></i></div>
+                    <p class="text-lg mb-4">You don't have enough money to buy this item!</p>
+                    <p class="text-gray-600 mb-6">Try selling some items or select another celebrity with more money.</p>
+                    <button id="okNoMoneyBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full w-full">OK, Got it</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End of content-wrapper -->
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="footer-links">
+                <a href="/privacy.html" target="_blank">Privacy Policy</a>
+                <a href="/about.html" target="_blank">About Us</a>
+                <a href="/contact.html" target="_blank">Contact Us</a>
+                <a href="/terms.html" target="_blank">Terms and Conditions</a>
+                <span class="ml-auto text-sm text-gray-500">&copy; <span id="currentYear"></span> Celebrity Money Spender</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Sound elements -->
+    <audio id="purchaseSound" src="https://assets.mixkit.co/active_storage/sfx/2058/2058-preview.mp3" preload="auto"></audio>
+    <audio id="sellSound" src="https://assets.mixkit.co/active_storage/sfx/2655/2655-preview.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/270/270-preview.mp3" preload="auto"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/active_storage/sfx/2053/2053-preview.mp3" preload="auto"></audio>
+
+    <script>
+        // Data
+        const celebrities = [
+            { id: 1, name: "Sachin Tendulkar", type: "cricketer", netWorth: 14000000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746420691/3V7iGVV_si9a2d.jpg" },
+            { id: 2, name: "MS Dhoni", type: "cricketer", netWorth: 11800000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746419737/3V7eZeS_csmema.jpg" },
+            { id: 3, name: "Virat Kohli", type: "cricketer", netWorth: 10500000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746419861/3V7kMYl_ouzvlw.jpg" },
+            { id: 4, name: "Rohit Sharma", type: "cricketer", netWorth: 1800000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746417982/3V74gf9_krjm6u.jpg" },
+            { id: 5, name: "Sourav Ganguly", type: "cricketer", netWorth: 5000000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746427727/3V7pMib_otp06g.jpg" },
+            { id: 6, name: "Yuvraj Singh", type: "cricketer", netWorth: 2000000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746427917/3MiNexp.md_z2zdjh.jpg" },
+            { id: 7, name: "Rahul Dravid", type: "cricketer", netWorth: 1900000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746427955/3Mikj5u_brkitx.jpg" },
+            { id: 8, name: "Hardik Pandya", type: "cricketer", netWorth: 1200000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746427980/3Mie2vs_ua2pxb.jpg" },
+            { id: 9, name: "Ravindra Jadeja", type: "cricketer", netWorth: 1100000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428023/3MirvLJ.md_tudcfh.jpg" },
+            { id: 10, name: "Rishabh Pant", type: "cricketer", netWorth: 800000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428052/3Miin24.md_owxml0.jpg" },
+            { id: 11, name: "Technical Guruji", type: "youtuber", netWorth: 3560000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428094/3Ms7vJ1.md_gky4ch.webp" },
+            { id: 12, name: "Bhuvan Bam", type: "youtuber", netWorth: 600000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428129/3MsVmaj.md_ntgmxe.jpg" },
+            { id: 13, name: "Carry Minati", type: "youtuber", netWorth: 500000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428153/3MsGkNI.md_bawwi7.jpg" },
+            { id: 14, name: "Amit Bhadana", type: "youtuber", netWorth: 400000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428206/3MsN9Q2.md_ygacfd.jpg" },
+            { id: 15, name: "Ashish Chanchlani", type: "youtuber", netWorth: 370000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428235/3MsRwIj.md_tlssne.jpg" },
+            { id: 16, name: "Sandeep Maheshwari", type: "youtuber", netWorth: 400000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428260/3Msv7KN_y4saci.jpg" },
+            { id: 17, name: "Elvish Yadav", type: "youtuber", netWorth: 500000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428292/3MsS1nf.md_dxjvnc.jpg" },
+            { id: 18, name: "Shikar Dhawan", type: "cricketer", netWorth: 1250000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428319/3MssNCF.md_gu5vlj.jpg" },
+            { id: 19, name: "Ranveer Allahbadia", type: "youtuber", netWorth: 580000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428344/3MstRcu_ursubf.jpg" },
+            { id: 20, name: "Dilraj singh rawat", type: "youtuber", netWorth: 500000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428373/3MLflGs.md_tsdfyj.jpg" },
+            { id: 21, name: "Mukesh Ambani", type: "businessman", netWorth: 11950000000000, image: "https://variety.com/wp-content/uploads/2020/12/Mukesh_Ambani.png" },
+            { id: 22, name: "Gautam Adani", type: "businessman", netWorth: 11600000000000, image: "https://wallpapercave.com/wp/wp9785889.jpg" },
+            { id: 23, name: "Shiv Nadar", type: "businessman", netWorth: 402000000000, image: "https://www.shivnadarfoundation.org/sites/default/files/siv_nadar_im01.jpg" },
+            { id: 24, name: "Savitri Jindal", type: "businessman", netWorth: 437000000000, image: "https://assets.gqindia.com/photos/5ea97cc3dc93e7000873b03a/master/pass/Savitri-Jindal.jpg" },
+            { id: 25, name: "Dilip Shanghvi", type: "businessman", netWorth: 287000000000, image: "https://assets.gqindia.com/photos/5e453daab2f47c000817d380/master/pass/Dilip-Shangvi.jpg" }
+        ];
+        const products = [
+            { id: 1, name: "Samosa", category: "food", price: 15, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428461/3MLoAhB.md_huma0n.jpg", description: "Crispy fried pastry with spicy potato filling" },
+            { id: 2, name: "Butter Chicken", category: "food", price: 250, image: "https://www.licious.in/blog/wp-content/uploads/2020/10/butter-chicken-.jpg", description: "Iconic Indian dish with chicken in tomato butter sauce" },
+            { id: 3, name: "Masala Dosa", category: "food", price: 120, image: "https://www.vegrecipesofindia.com/wp-content/uploads/2021/07/dosa-recipe-4.jpg", description: "South Indian crepe filled with spiced potatoes" },
+            { id: 4, name: "Biryani", category: "food", price: 300, image: "https://www.cubesnjuliennes.com/wp-content/uploads/2020/07/Chicken-Biryani-Recipe-500x500.jpg", description: "Aromatic rice dish with spices and meat or vegetables" },
+            { id: 5, name: "Paneer Tikka", category: "food", price: 220, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428490/3MLTfuj.md_r5cdn2.jpg", description: "Grilled cheese cubes marinated in spices" },
+            { id: 6, name: "Chole Bhature", category: "food", price: 150, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428524/3MLMOFa.md_hchvs2.jpg", description: "Spicy chickpea curry with fried bread" },
+            { id: 7, name: "Idli Sambhar", category: "food", price: 100, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428550/3MLXFjV.md_mi6npn.jpg", description: "Steamed rice cakes with lentil soup" },
+            { id: 8, name: "Gulab Jamun", category: "food", price: 60, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428580/3MLhjbR.md_zr12jv.jpg", description: "Sweet milk dumplings soaked in sugar syrup" },
+            { id: 9, name: "Pav Bhaji", category: "food", price: 130, image: "https://www.vegrecipesofindia.com/wp-content/uploads/2021/04/pav-bhaji-recipe-1.jpg", description: "Spicy vegetable mash served with buttered rolls" },
+            { id: 10, name: "Jalebi", category: "food", price: 50, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428614/3MLwG9a.md_cioebo.jpg", description: "Crispy sweet pretzel-shaped dessert soaked in syrup" },
+            { id: 11, name: "Rajma Chawal", category: "food", price: 180, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428639/3ML8OKl.md_ezbxty.jpg", description: "Kidney bean curry served with rice" },
+            { id: 12, name: "Dal Makhani", category: "food", price: 170, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428667/3MLPOXt.md_cdeusu.jpg", description: "Creamy lentil curry with butter and cream" },
+            { id: 13, name: "Vada Pav", category: "food", price: 40, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428758/3MLQKG9.md_tovxrg.jpg", description: "Spicy potato fritter in a bun with chutneys" },
+            { id: 14, name: "Aloo Paratha", category: "food", price: 80, image: "https://www.vegrecipesofindia.com/wp-content/uploads/2009/08/aloo-paratha-recipe.jpg", description: "Flatbread stuffed with spiced potatoes" },
+            { id: 15, name: "Rasmalai", category: "food", price: 90, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428784/3MLbe07.md_uerxi1.jpg", description: "Soft cheese patties in sweetened milk" },
+            { id: 16, name: "Dhokla", category: "food", price: 70, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746428820/3MLp1us.md_nygwyo.jpg", description: "Steamed savory cake from Gujarat" },
+            { id: 17, name: "Lassi", category: "food", price: 80, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430054/3MQ9yvt.md_l5nrab.jpg", description: "Sweet or salty yogurt-based drink" },
+            { id: 18, name: "Tandoori Chicken", category: "food", price: 350, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430100/3MQJqxa.md_aoe9ej.jpg", description: "Yogurt and spice marinated chicken cooked in tandoor" },
+            { id: 19, name: "Malai Kofta", category: "food", price: 230, image: "https://www.vegrecipesofindia.com/wp-content/uploads/2021/04/malai-kofta-2.jpg", description: "Fried vegetable and cheese balls in creamy sauce" },
+            { id: 20, name: "Bhel Puri", category: "food", price: 80, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430156/3MQCFOQ.md_eclsm7.jpg", description: "Savory and tangy puffed rice snack" },
+            { id: 21, name: "Kachori", category: "food", price: 30, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430209/3MQxsBS.md_h9f87s.jpg", description: "Fried pastry filled with spiced lentils or peas" },
+            { id: 22, name: "Pani Puri", category: "food", price: 60, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430247/3MQA0J9.md_lsid1h.jpg", description: "Hollow crisp fried balls filled with spicy water" },
+            { id: 23, name: "Matar Paneer", category: "food", price: 200, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430276/3MQM2b2.md_pcrdgh.jpg", description: "Peas and cottage cheese curry" },
+            { id: 24, name: "Rasgulla", category: "food", price: 70, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430306/3MQOuPp.md_jsyx5d.jpg", description: "Soft and spongy cheese balls in sugar syrup" },
+            { id: 25, name: "Mysore Pak", category: "food", price: 120, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430328/3MQ8de1.md_wsv8d4.jpg", description: "South Indian sweet made with ghee and gram flour" },
+            { id: 26, name: "Misal Pav", category: "food", price: 140, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430372/3MQr7uS.md_z3slzs.jpg", description: "Spicy sprouted bean curry with bread" },
+            { id: 27, name: "Kaju Katli", category: "food", price: 900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430398/3MQii7f.md_qltukg.jpg", description: "Diamond-shaped cashew fudge" },
+            { id: 28, name: "Paratha", category: "food", price: 50, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430430/3MQbx2t.md_yrsvdv.jpg", description: "Flaky layered flatbread" },
+            { id: 29, name: "Chaat", category: "food", price: 70, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430453/3MZqy7f.md_xoddpm.jpg", description: "Savory snack with a mix of spicy, tangy flavors" },
+            { id: 30, name: "Chicken Tikka", category: "food", price: 280, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430486/3MZxSHu.md_zlyyua.jpg", description: "Boneless chicken pieces marinated and grilled" },
+            { id: 31, name: "Fish Curry", category: "food", price: 320, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430523/3MZuCba.md_mk8sbq.jpg", description: "Spicy fish curry made with regional spices" },
+            { id: 32, name: "Palak Paneer", category: "food", price: 210, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430558/3MZAMZJ.md_w6dqee.jpg", description: "Spinach curry with cottage cheese" },
+            { id: 33, name: "Dahi Bhalla", category: "food", price: 90, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430587/3MZ7Zut.md_nfh7ms.jpg", description: "Fried lentil dumplings in yogurt with chutneys" },
+            { id: 34, name: "Kheer", category: "food", price: 100, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430616/3MZcGjt.md_ynibgj.jpg", description: "Indian rice pudding with nuts and cardamom" },
+            { id: 35, name: "Laddoo", category: "food", price: 40, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430652/3MZGFgs.md_hxuoik.jpg", description: "Sweet ball-shaped dessert" },
+            { id: 36, name: "Poha", category: "food", price: 60, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430680/3MZMaFn.md_gklymx.jpg", description: "Flattened rice snack with spices and vegetables" },
+            { id: 37, name: "Upma", category: "food", price: 70, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430711/3MZVWOv.md_dtxrhl.jpg", description: "Savory semolina breakfast dish" },
+            { id: 38, name: "Appam", category: "food", price: 90, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430738/3MZhb7n_ihlvye.jpg", description: "Fermented rice pancake from South India" },
+            { id: 39, name: "Naan", category: "food", price: 40, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430738/3MZhb7n_ihlvye.jpg", description: "Soft leavened flatbread from tandoor" },
+            { id: 40, name: "Chicken Curry", category: "food", price: 280, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430782/3MZelSI.md_r2svkq.jpg", description: "Spicy chicken curry with onion-tomato gravy" },
+            { id: 41, name: "Bhatura", category: "food", price: 35, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430812/3MZv1Qs.md_nqpgmu.jpg", description: "Deep-fried leavened bread" },
+            { id: 42, name: "Bombay Sandwich", category: "food", price: 80, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430838/3MZSA5N.md_utttwp.jpg", description: "Layered sandwich with vegetables and chutneys" },
+            { id: 43, name: "Aloo Tikki", category: "food", price: 50, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430864/3MZUDMu_lbakcm.jpg", description: "Spiced potato patties served with chutneys" },
+            { id: 44, name: "Chana Masala", category: "food", price: 170, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430898/3MZ4lu2_ip8kkn.jpg", description: "Spicy chickpea curry" },
+            { id: 45, name: "Ras Malai", category: "food", price: 90, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746430925/3MZQf3X_nlivnv.jpg", description: "Cheese patties soaked in sweetened milk" },
+            { id: 46, name: "Medu Vada", category: "food", price: 80, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431310/3MZZoUF_jtlv2d.jpg", description: "Savory fried lentil doughnut" },
+            { id: 47, name: "Shahi Paneer", category: "food", price: 240, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431335/3MZtv4I_shlofh.jpg", description: "Rich creamy curry with cottage cheese" },
+            { id: 48, name: "Baingan Bharta", category: "food", price: 180, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431361/3MZDtov_xrk0au.jpg", description: "Smoky mashed eggplant curry" },
+            { id: 49, name: "Rabri", category: "food", price: 110, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431388/3MZmjTu_sagbfp.jpg", description: "Sweet condensed milk dessert with nuts" },
+            { id: 50, name: "Kathi Roll", category: "food", price: 150, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431422/3MZyMbe_hzmuts.jpg", description: "Wrap with fillings and sauces" },
+            { id: 51, name: "iPhone 15 Pro", category: "electronics", price: 140000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431453/3VTkwHF_kqqukn.jpg", description: "Latest Apple iPhone with advanced features" },
+            { id: 52, name: "Samsung Galaxy S24 Ultra", category: "electronics", price: 129999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431479/3VTkhS1_jixeki.jpg", description: "Premium Android smartphone with S Pen" },
+            { id: 53, name: "OnePlus 12", category: "electronics", price: 64999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431504/3VTkNAg_kvhl0g.jpg", description: "Flagship smartphone with Snapdragon processor" },
+            { id: 54, name: "MacBook Pro ", category: "electronics", price: 199900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431539/3VRqwkx_ahwss7.jpg", description: "Powerful laptop with Apple Silicon" },
+            { id: 55, name: "Dell XPM3S 15", category: "electronics", price: 175000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431564/3VTgb8N_lendxt.jpg", description: "Premium Windows laptop with InfinityEdge display" },
+            { id: 56, name: "Sony PlayStation 5", category: "electronics", price: 54990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431603/3VTr5cQ.md_zqhb9d.jpg", description: "Next-gen gaming console" },
+            { id: 57, name: "iPad Pro", category: "electronics", price: 81900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431639/3VTrNRI_usu4tu.jpg", description: "Apple's premium tablet with M2 chip" },
+            { id: 58, name: "Sony Bravia 65\" 4K TV", category: "electronics", price: 149990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431715/3VT616J_vojfhf.jpg", description: "4K Ultra HD Smart TV with Google TV" },
+            { id: 59, name: "Bose QuietComfort Headphones", category: "electronics", price: 29900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431751/3VTP2Mg_rvrndp.jpg", description: "Premium noise-cancelling headphones" },
+            { id: 60, name: "Canon EOS R6 Camera", category: "electronics", price: 215995, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431780/3VTPWKb_rnbgbd.jpg", description: "Full-frame mirrorless camera for professionals" },
+            { id: 61, name: "Dyson V15 Vacuum", category: "electronics", price: 62900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431812/3VTQFzN_akpoqr.jpg", description: "Cordless vacuum with laser dust detection" },
+            { id: 62, name: "Samsung 32 cu.ft. Refrigerator", category: "electronics", price: 289990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431836/3VTQ17j_dlraxy.jpg", description: "Family Hub smart refrigerator with touchscreen" },
+            { id: 63, name: "Amazon Echo Studio", category: "electronics", price: 22999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746431869/3VTQrQI_kh1lv5.jpg", description: "High-fidelity smart speaker with Alexa" },
+            { id: 64, name: "Microsoft Surface Laptop", category: "electronics", price: 106999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746432540/3VTDWhl_sq5jqe.jpg", description: "Sleek and powerful Windows laptop" },
+            { id: 65, name: "Apple Watch Ultra", category: "electronics", price: 89900, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746432577/3VTbFvs_omngub.jpg", description: "Advanced smartwatch for extreme adventures" },
+            { id: 66, name: "LG 32\" 4K Monitor", category: "electronics", price: 54999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746432616/3VTmRfI_x6lugp.jpg", description: "Ultra HD monitor with Ergo stand" },
+            { id: 67, name: "Asus ROG Gaming Laptop", category: "electronics", price: 184990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746432653/3VuJA8P_mnjajl.jpg", description: "High-performance gaming laptop with RGB lighting" },
+            { id: 68, name: "Panasonic 2 Ton AC", category: "electronics", price: 54990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746432690/3VuJQix_xqpain.jpg", description: "Inverter split air conditioner with air purification" },
+            { id: 69, name: "Nikon Z9 Camera", category: "electronics", price: 539995, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746433913/3VudIxs_lfnmpr.jpg", description: "Flagship mirrorless camera for professionals" },
+            { id: 70, name: "Philips Air Purifier", category: "electronics", price: 36999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746433944/3Vu3ucl_yleaba.jpg", description: "HEPA air purifier for large rooms" },
+            { id: 71, name: "Samsung 65\" QLED TV", category: "electronics", price: 249990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746433971/3VuFKfj_cgmw6x.jpg", description: "Quantum Dot display with HDR" },
+            { id: 72, name: "Fitbit Sense 2", category: "electronics", price: 24999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746433993/3VuF0bt_qkkdmf.jpg", description: "Advanced health and fitness smartwatch" },
+            { id: 73, name: "Bosch Washing Machine", category: "electronics", price: 64990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434030/3VuaHmX_itdixu.jpg", description: "Front-load washing machine with smart features" },
+            { id: 74, name: "DJI Mavic 3 Drone", category: "electronics", price: 179999, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434052/3VucxFR_u7nv3d.jpg", description: "Professional camera drone with Hasselblad camera" },
+            { id: 75, name: "Xbox Series X", category: "electronics", price: 49990, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434075/3VuV30u_izx7ia.jpg", description: "Microsoft's most powerful gaming console" },
+            { id: 76, name: "Maruti Swift", category: "cars", price: 600000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434097/3VRAAZb_lfq212.jpg", description: "Popular hatchback with good fuel efficiency" },
+            { id: 77, name: "Hyundai Creta", category: "cars", price: 1200000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434120/3VRR2UB.md_jjhmk3.jpg", description: "Compact SUV with premium features" },
+            { id: 78, name: "Tata Nexon", category: "cars", price: 800000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434143/3VRRkqx.md_z7ziee.jpg", description: "Stylish compact SUV with good safety rating" },
+            { id: 79, name: "Mahindra XUV700", category: "cars", price: 1300000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434162/3VR70S2_asovry.jpg", description: "Feature-packed premium SUV" },
+            { id: 80, name: "Toyota Fortuner", category: "cars", price: 3500000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434186/3VRYJff.md_kldmdz.jpg", description: "Rugged and luxurious full-size SUV" },
+            { id: 81, name: "Honda City", category: "cars", price: 1150000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434208/3VRYv1f_esmgll.jpg", description: "Reliable sedan with premium features" },
+            { id: 82, name: "Maruti Baleno", category: "cars", price: 750000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434230/3VRaav2_p2xdft.jpg", description: "Premium hatchback with spacious interior" },
+            { id: 83, name: "Kia Seltos", category: "cars", price: 1100000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434252/3VRcbDP_d2uvxn.jpg", description: "Feature-rich compact SUV with multiple engine options" },
+            { id: 84, name: "Tata Harrier", category: "cars", price: 1500000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434271/3VRlyp2_gh2kpn.jpg", description: "Premium SUV with striking design" },
+            { id: 85, name: "Mahindra Thar", category: "cars", price: 1600000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434299/3VR0Dn1_pa2fto.jpg", description: "Iconic off-road SUV with retro design" },
+            { id: 86, name: "MG Hector", category: "cars", price: 1400000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434322/3VRE1qX_wwkmla.jpg", description: "Internet-connected SUV with large touchscreen" },
+            { id: 87, name: "Honda Activa", category: "cars", price: 75000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434344/3VRGIQS_hng7ae.jpg", description: "India's most popular scooter" },
+            { id: 88, name: "Royal Enfield Classic 350", category: "cars", price: 195000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434367/3VRMvHb.md_xrcd9y.jpg", description: "Iconic retro motorcycle" },
+            { id: 89, name: "Hero Splendor", category: "cars", price: 72000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434386/3VRva8N_w6grd0.jpg", description: "Fuel-efficient commuter motorcycle" },
+            { id: 90, name: "Bajaj Pulsar", category: "cars", price: 110000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434406/3VR8pI9.md_bfgzuz.jpg", description: "Popular sports commuter motorcycle" },
+            { id: 91, name: "Mercedes-Benz E-Class", category: "cars", price: 7500000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434466/3VRUkNI.md_imqgn0.jpg", description: "Luxury sedan with cutting-edge technology" },
+            { id: 92, name: "BMW 5 Series", category: "cars", price: 6900000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434486/3VRrzBe_rffvlu.jpg", description: "Executive luxury sedan with sporty performance" },
+            { id: 93, name: "Audi Q7", category: "cars", price: 8700000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434507/3VR4sHv_lxkjeo.jpg", description: "Luxury 7-seater SUV with premium features" },
+            { id: 94, name: "Volvo XC60", category: "cars", price: 6900000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434529/3VR6MeR_rcu934.jpg", description: "Premium SUV with advanced safety features" },
+            { id: 95, name: "Tesla Model 3", category: "cars", price: 6000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434551/3VRPqpR_ujctys.jpg", description: "All-electric sedan with cutting-edge technology" },
+            { id: 96, name: "Pressure Cooker", category: "household", price: 1500, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434587/3V5kOVs_jp4rni.jpg", description: "Essential Indian kitchen item for quick cooking" },
+            { id: 97, name: "Steel Dinner Set", category: "household", price: 2500, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434615/3V5vUBa.md_qfm03r.jpg", description: "Complete dinner set with plates and bowls" },
+            { id: 98, name: "Mixer Grinder", category: "household", price: 3500, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434651/3V58Jv2_mwx6fq.jpg", description: "Versatile kitchen appliance for Indian cooking" },
+            { id: 99, name: "Non-Stick Tawa", category: "household", price: 800, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434673/3V5UbCF_b9c2ph.jpg", description: "For making rotis, dosas and parathas" },
+            { id: 100, name: "Water Purifier", category: "household", price: 15000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434694/3V5gxaf_c5yqev.jpg", description: "RO+UV water purifier for safe drinking water" },
+            { id: 101, name: "Gas Stove", category: "household", price: 5000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434715/3V5g0aj_b9x45l.jpg", description: "Durable 3-burner stove for Indian cooking" },
+            { id: 102, name: "Copper Water Bottle", category: "household", price: 600, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434736/3V56hnS_bv8wxs.jpg", description: "Ayurvedic health benefits in stylish design" },
+            { id: 103, name: "Steel Storage Containers", category: "household", price: 1200, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746434758/3V56QSa_pb2ot5.jpg", description: "Set of 6 containers for spices and ingredients" },
+            { id: 104, name: "Electric Rice Cooker", category: "household", price: 2000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435232/3V5PfRf_apr529.jpg", description: "For perfectly cooked rice every time" },
+            { id: 105, name: "Wet Grinder", category: "household", price: 6000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435253/3V5Pmdu_cgtoau.jpg", description: "For making dosa and idli batter" },
+            { id: 106, name: "Dining Table Set", category: "household", price: 30000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435284/3V5bbOF_dmkqmj.jpg", description: "6-seater wooden dining table with chairs" },
+            { id: 107, name: "Sofa Set", category: "household", price: 45000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435306/3V5moWG_xzsn0k.jpg", description: "3+1+1.comfortable seating for family room" },
+            { id: 108, name: "Double Bed", category: "household", price: 25000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435336/3V72waj_hezkkf.jpg", description: "King size bed with storage" },
+            { id: 109, name: "Air Purifier", category: "household", price: 18000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435358/3V7K9p4_kwednx.jpg", description: "HEPA filter for cleaner indoor air" },
+            { id: 110, name: "Microwave Oven", category: "household", price: 12000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435384/3V7KGZN_eoktbq.jpg", description: "Convection microwave for cooking and baking" },
+            { id: 111, name: "Induction Cooktop", category: "household", price: 3000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435406/3V7fHcg_lxhxpe.jpg", description: "Energy-efficient cooking alternative" },
+            { id: 112, name: "Ceiling Fan", category: "household", price: 2500, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435429/3V7Cgbj_xowait.jpg", description: "Energy-efficient fan with stylish design" },
+            { id: 113, name: "Water Heater (Geyser)", category: "household", price: 8000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435450/3V7nqes_yigjub.jpg", description: "25L capacity for family bathroom" },
+            { id: 114, name: "Washing Machine", category: "household", price: 25000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435475/3V7nMrP_ke9xku.jpg", description: "Front-load 7kg automatic washing machine" },
+            { id: 115, name: "Study Table", category: "household", price: 8000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435499/3V7AKMJ_qhn9uq.jpg", description: "Wooden desk with storage compartments" },
+            { id: 116, name: "Luxury Villa in Goa", category: "luxury", price: 50000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435523/3V5z2P2.md_nyklqa.jpg", description: "Beachside luxury villa with private pool" },
+            { id: 117, name: "Private Jet (1 Hour)", category: "luxury", price: 1000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435549/3V5zODG_voacmv.jpg", description: "Charter a private jet for an hour" },
+            { id: 118, name: "Rolex Watch", category: "luxury", price: 1200000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435572/3V5IKsR_w8nqsr.jpg", description: "Luxury timepiece and status symbol" },
+            { id: 119, name: "Lamborghini Urus", category: "luxury", price: 40000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435609/3V5A9JS_atxzix.jpg", description: "Super luxury SUV with supercar performance" },
+            { id: 120, name: "Yacht (Week Charter)", category: "luxury", price: 35000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435631/3V5AY1R_krjgn1.jpg", description: "Charter a luxury yacht for a week" },
+            { id: 121, name: "5-Carat Diamond Ring", category: "luxury", price: 10000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435653/3V5APrQ_taadek.jpg", description: "Exquisite diamond solitaire in platinum setting" },
+            { id: 122, name: "Louis Vuitton Bag", category: "luxury", price: 300000, image: "https://in.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm-monogram-handbags--M40995_PM2_Front%20view.jpg", description: "Iconic designer handbag" },
+            { id: 123, name: "Mansion in Mumbai", category: "luxury", price: 500000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435677/3V57ldQ_afqnqj.jpg", description: "Luxury home in prime location" },
+            { id: 124, name: "Helicopter (Purchase)", category: "luxury", price: 100000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435698/3V57jEJ_cf3qsp.jpg", description: "Bell 407 personal helicopter" },
+            { id: 125, name: "Private Island (Week Stay)", category: "luxury", price: 10000000, image: "https://res.cloudinary.com/dghihtaoy/image/upload/v1746435736/3V5Yqj1_xqbw2x.jpg", description: "Exclusive private island experience" },
+            { id: 126, name: "Premium Italian Wool Suit", category: "clothes", price: 450000, image: "https://images.pexels.com/photos/2709563/pexels-photo-2709563.jpeg", description: "Luxury Italian wool suit with impeccable tailoring" },
+            { id: 127, name: "Classic Black Tuxedo", category: "clothes", price: 380000, image: "https://images.pexels.com/photos/1342609/pexels-photo-1342609.jpeg", description: "Elegant black tuxedo for formal occasions" },
+            { id: 128, name: "Bespoke Navy Pinstripe Suit", category: "clothes", price: 520000, image: "https://images.pexels.com/photos/6764954/pexels-photo-6764954.jpeg", description: "Custom tailored pinstripe suit with fine detailing" },
+            { id: 129, name: "Evening Gown by Sabyasachi", category: "clothes", price: 680000, image: "https://i.pinimg.com/564x/d0/02/74/d002740ec3be3d10b88cd352ca464e1c.jpg", description: "Stunning designer evening gown with intricate embroidery" },
+            { id: 130, name: "Red Carpet Couture Dress", category: "clothes", price: 750000, image: "https://i.pinimg.com/736x/60/96/9e/60969ee94dd37abf2502f0ca025b1346.jpg", description: "Exclusive couture dress perfect for red carpet events" },
+            { id: 131, name: "Exclusive Bridal Collection", category: "clothes", price: 1250000, image: "https://assets.vogue.com/photos/65fb2a11e785cc4321e1fdb2/master/w_2560%2Cc_limit/Group%2520Model%2520Shot.jpg", description: "Luxury bridal wear with precious stone embellishments" },
+            { id: 132, name: "Cashmere Lounge Set", category: "clothes", price: 320000, image: "https://i.pinimg.com/736x/48/f3/ae/48f3aec9bf1f94be055b8bb6b33a5f08.jpg", description: "Ultra-soft premium cashmere loungewear" },
+            { id: 133, name: "Silk Designer Pajamas", category: "clothes", price: 280000, image: "https://thumbs.dreamstime.com/b/fashion-woman-gold-dress-luxury-girl-elegant-golden-fabric-gown-flying-sparkles-cloth-83261289.jpg", description: "Opulent silk pajama set for ultimate comfort" },
+            { id: 134, name: "Weekend Getaway Collection", category: "clothes", price: 295000, image: "https://i.pinimg.com/736x/23/33/9c/23339cc4d45396290f2a4283588a1557.jpg", description: "Curated luxury resort wear collection" },
+            { id: 135, name: "Italian Leather Oxfords", category: "clothes", price: 180000, image: "https://images.pexels.com/photos/18155790/pexels-photo-18155790/free-photo-of-designer-sneakers-in-a-studio.jpeg", description: "Handcrafted Italian leather dress shoes" },
+            { id: 136, name: "Embellished Evening Heels", category: "clothes", price: 250000, image: "https://www.santosshoes.com/uploads/subcanais_conteudos/sapato-preto-de-luxo.jpg", description: "Crystal-embellished designer high heels" },
+            { id: 137, name: "Limited Edition Sneakers", category: "clothes", price: 175000, image: "https://media.gq.com/photos/60d21a25ab6b8cc6e9d2c80a/1:1/w_3600,h_3600,c_limit/SNEAKER_GUIDE_OPENER.jpg", description: "Collector's edition designer sneakers" },
+            { id: 138, name: "Pure Cashmere Overcoat", category: "clothes", price: 475000, image: "https://i.pinimg.com/736x/11/8c/e1/118ce1ca8e4bd8cdd15be27d0a057510.jpg", description: "Luxurious cashmere overcoat for winter elegance" },
+            { id: 139, name: "Designer Fur Jacket", category: "clothes", price: 520000, image: "https://image.made-in-china.com/2f0j00ODJqPAiglIpB/Designer-Shoes-Men-Women-Latest-Trends-Paris-Luxury-Designer-Shoe-Sneakers-Spaceship-Chunky-Casual-Sports-Shoes.webp", description: "Premium fur jacket with satin lining" },
+            { id: 140, name: "Royal Wedding Sherwani", category: "clothes", price: 550000, image: "https://t4.ftcdn.net/jpg/02/52/37/29/360_F_252372949_wF016jZCxmO9eClldKatxjQSNlnTHEM3.jpg", description: "Opulent traditional sherwani with gold embroidery" },
+            { id: 141, name: "Hand-Embroidered Lehenga", category: "clothes", price: 880000, image: "https://sarahbradshaw.com/wp-content/uploads/2024/04/Elie-Saab-SS25-4_websize.jpg", description: "Exquisite hand-embroidered designer lehenga" },
+            { id: 142, name: "Diamond-Studded Belt", category: "clothes", price: 385000, image: "https://t3.ftcdn.net/jpg/01/63/17/40/360_F_163174023_R2oASkPLUGm2q9KmuxtdhMrHfsHEcQDu.jpg", description: "Luxury belt with genuine diamond embellishments" },
+            { id: 143, name: "Silk Designer Scarf", category: "clothes", price: 125000, image: "https://albluxweb.com/wp-content/uploads/2023/03/illustration-of-a-luxury-dress-modern.png", description: "Hand-painted silk scarf by renowned designer" },
+            { id: 144, name: "Limited Edition Cufflinks", category: "clothes", price: 195000, image: "https://www.darveys.com/blog/wp-content/uploads/2024/03/Luxury-Sneakers-Brands-In-The-World-Banner.jpg", description: "Platinum cufflinks with precious stones" },
+            { id: 145, name: "Handcrafted Leather Wallet", category: "clothes", price: 85000, image: "https://assets.teenvogue.com/photos/67ec439616f0fba8f5a5049d/16:9/w_2560%2Cc_limit/Style_Prom2025-BestPromDresses_HEADER.jpg", description: "Artisan leather wallet with exotic leather inlays" }
+        ];
+
+
+        // DOM Elements
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const celebrityScreen = document.getElementById('celebrityScreen');
+        const mainScreen = document.getElementById('mainScreen');
+        const startButton = document.getElementById('startButton');
+        const backButton = document.getElementById('backButton');
+        const celebrityGrid = document.getElementById('celebrityGrid');
+        const celebrityName = document.getElementById('celebrityName');
+        const celebrityType = document.getElementById('celebrityType');
+        const celebrityAvatar = document.getElementById('celebrityAvatar');
+        const moneyLeft = document.getElementById('moneyLeft');
+        const moneySpent = document.getElementById('moneySpent');
+        const progressBar = document.getElementById('progressBar');
+        const productsGrid = document.getElementById('productsGrid');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const searchInput = document.getElementById('searchInput');
+        const receiptButton = document.getElementById('receiptButton');
+        const receiptModal = document.getElementById('receiptModal');
+        const closeReceiptBtn = document.getElementById('closeReceiptBtn');
+        const receiptItems = document.getElementById('receiptItems');
+        const receiptCelebrityName = document.getElementById('receiptCelebrityName');
+        const receiptTotalSpent = document.getElementById('receiptTotalSpent');
+        const receiptGrandTotal = document.getElementById('receiptGrandTotal');
+        const receiptMoneyLeft = document.getElementById('receiptMoneyLeft');
+        const receiptPercentageSpent = document.getElementById('receiptPercentageSpent');
+        const cartCount = document.getElementById('cartCount');
+        const shareBtn = document.getElementById('shareBtn');
+        const shareOptions = document.getElementById('shareOptions');
+        const facebookShare = document.getElementById('facebookShare');
+        const twitterShare = document.getElementById('twitterShare');
+        const telegramShare = document.getElementById('telegramShare');
+        const instagramShare = document.getElementById('instagramShare');
+        const whatsappShare = document.getElementById('whatsappShare');
+        const celebFilters = document.querySelectorAll('.celeb-filter');
+        const socialContact = document.getElementById('socialContact');
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const noMoneyModal = document.getElementById('noMoneyModal');
+        const closeNoMoneyBtn = document.getElementById('closeNoMoneyBtn');
+        const okNoMoneyBtn = document.getElementById('okNoMoneyBtn');
+        const purchaseSound = document.getElementById('purchaseSound');
+        const sellSound = document.getElementById('sellSound');
+        const errorSound = document.getElementById('errorSound');
+        const clickSound = document.getElementById('clickSound');
+        const successSound = document.getElementById('successSound');
+        const currentYearSpan = document.getElementById('currentYear');
+
+
+        // App State
+        let selectedCelebrity = null;
+        let cart = {};
+        let filteredProducts = [...products];
+        let currentFilter = 'all';
+        let celebFilterType = 'all';
+        let lastScrollPosition = 0;
+        let socialContactVisible = false;
+
+        // Function to play sound reliably
+        function playSound(soundElement) {
+            if (soundElement) {
+                soundElement.pause();
+                soundElement.currentTime = 0;
+                soundElement.play().catch(error => console.log("Sound play interrupted or failed:", error));
+            }
+        }
+
+        // Format currency function
+        function formatCurrency(amount) {
+            if (Math.abs(amount) >= 10000000) {
+                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
+            } else if (Math.abs(amount) >= 100000) {
+                return '₹' + (amount / 100000).toFixed(2) + ' Lac';
+            } else {
+                return '₹' + amount.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            }
+        }
+
+        // Calculate remaining money and update UI
+        function updateMoney() {
+            let spent = 0;
+            Object.keys(cart).forEach(productId => {
+                const product = products.find(p => p.id === parseInt(productId));
+                if (product) spent += product.price * cart[productId];
+            });
+
+            const remaining = selectedCelebrity.netWorth - spent;
+            const percentSpent = selectedCelebrity.netWorth > 0 ? (spent / selectedCelebrity.netWorth) * 100 : 0;
+
+            moneyLeft.textContent = formatCurrency(remaining);
+            moneySpent.textContent = formatCurrency(spent);
+            progressBar.style.width = `${Math.min(100, Math.max(0, percentSpent))}%`;
+
+            const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+            cartCount.textContent = totalItems;
+
+            return { spent, remaining, percentSpent };
+        }
+
+        // Initialize celebrity grid
+        function initCelebrityGrid() {
+            celebrityGrid.innerHTML = '';
+            const celebsToShow = celebFilterType === 'all'
+                ? celebrities
+                : celebrities.filter(celeb => celeb.type === celebFilterType);
+
+            celebsToShow.forEach(celebrity => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all product-card';
+                card.innerHTML = `
+                    <img src="${celebrity.image}" alt="${celebrity.name}" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">${celebrity.name}</h3>
+                        <p class="text-sm text-gray-600 capitalize">${celebrity.type}</p>
+                        <p class="text-indigo-600 font-bold mt-2">${formatCurrency(celebrity.netWorth)}</p>
+                        <button class="select-celebrity-btn mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full w-full"
+                                data-id="${celebrity.id}">
+                            Select
+                        </button>
+                    </div>
+                `;
+                celebrityGrid.appendChild(card);
+                // Event listener moved to parent `celebrityGrid` for delegation
+            });
+        }
+        // Event delegation for celebrity selection
+        celebrityGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('select-celebrity-btn')) {
+                playSound(clickSound);
+                const celebId = parseInt(e.target.getAttribute('data-id'));
+                const celebrity = celebrities.find(c => c.id === celebId);
+                if (celebrity) {
+                    selectCelebrity(celebrity);
+                }
+            }
+        });
+
+
+        function selectCelebrity(celebrity) {
+            selectedCelebrity = celebrity;
+            celebrityName.textContent = celebrity.name;
+            celebrityType.textContent = celebrity.type.charAt(0).toUpperCase() + celebrity.type.slice(1);
+            celebrityAvatar.src = celebrity.image;
+            
+            cart = {};
+            updateMoney();
+
+            celebrityScreen.classList.add('hidden');
+            mainScreen.classList.remove('hidden');
+            filterProducts('all');
+            playSound(successSound);
+            window.scrollTo(0, 0);
+        }
+
+        function updateProductCardUI(productId) {
+            const product = products.find(p => p.id === parseInt(productId));
+            if (!product) return;
+
+            const card = productsGrid.querySelector(`.product-card[data-product-id="${productId}"]`);
+            if (!card) return;
+
+            const quantity = cart[productId] || 0;
+            const { remaining } = updateMoney();
+            const canAfford = product.price <= remaining;
+
+            const qtyInput = card.querySelector('.quantity-input');
+            const buyBtn = card.querySelector('.buy-btn');
+            const sellBtn = card.querySelector('.sell-btn');
+            const spentBar = card.querySelector('.spent-bar');
+
+            if (qtyInput) qtyInput.value = quantity; // Check if qtyInput exists
+
+            if (buyBtn) {
+                if (canAfford) {
+                    buyBtn.classList.remove('bg-gray-100', 'text-gray-400', 'opacity-50', 'cursor-not-allowed');
+                    buyBtn.classList.add('bg-green-100', 'text-green-600');
+                    buyBtn.disabled = false;
+                } else {
+                    buyBtn.classList.add('bg-gray-100', 'text-gray-400', 'opacity-50', 'cursor-not-allowed');
+                    buyBtn.classList.remove('bg-green-100', 'text-green-600');
+                    buyBtn.disabled = true;
+                }
+            }
+
+            if (sellBtn) {
+                if (quantity > 0) {
+                    sellBtn.classList.remove('bg-gray-100', 'text-gray-400', 'opacity-50', 'cursor-not-allowed');
+                    sellBtn.classList.add('bg-red-100', 'text-red-600');
+                    sellBtn.disabled = false;
+                } else {
+                    sellBtn.classList.add('bg-gray-100', 'text-gray-400', 'opacity-50', 'cursor-not-allowed');
+                    sellBtn.classList.remove('bg-red-100', 'text-red-600');
+                    sellBtn.disabled = true;
+                }
+            }
+            
+            if (spentBar) spentBar.style.width = `${calculateSpentPercentage(product)}%`;
+        }
+
+
+        // Initialize products grid
+        function initProductsGrid() {
+            productsGrid.innerHTML = '';
+            const { remaining } = updateMoney();
+
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg overflow-hidden shadow-lg product-card';
+                card.setAttribute('data-product-id', product.id);
+
+                const formattedPrice = formatCurrency(product.price);
+                const quantity = cart[product.id] || 0;
+                const canAfford = product.price <= remaining;
+
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold">${product.name}</h3>
+                            <span class="text-indigo-600 font-bold">${formattedPrice}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-1">${product.description}</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <button class="sell-btn btn-counter ${quantity > 0 ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-400 opacity-50 cursor-not-allowed'}"
+                                    data-id="${product.id}" ${quantity === 0 ? 'disabled' : ''}>
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <div class="custom-number-input">
+                                <input type="number" class="quantity-input w-20 text-center border border-gray-300 rounded py-1"
+                                       value="${quantity}" min="0" data-id="${product.id}">
+                            </div>
+                            <button class="buy-btn btn-counter ${canAfford ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400 opacity-50 cursor-not-allowed'}"
+                                    data-id="${product.id}" ${canAfford ? '' : 'disabled'}>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="mt-3 relative h-1 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="spent-bar" style="width: ${calculateSpentPercentage(product)}%"></div>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+            // After grid is rendered, update all product card UIs once
+            filteredProducts.forEach(p => updateProductCardUI(p.id));
+        }
+
+        // Event delegation for product grid
+        productsGrid.addEventListener('click', (e) => {
+            const target = e.target.closest('button'); // Find the closest button
+            if (!target) return;
+
+            const productIdStr = target.getAttribute('data-id');
+            if (!productIdStr) return;
+
+            const product = products.find(p => p.id === parseInt(productIdStr));
+
+            if (target.classList.contains('buy-btn')) {
+                const currentMoney = selectedCelebrity.netWorth - Object.keys(cart).reduce((acc, id) => acc + (products.find(p=>p.id==id).price * (cart[id]||0)), 0);
+                if (product && product.price <= currentMoney) {
+                    buyProduct(productIdStr);
+                } else {
+                    showNoMoneyModal();
+                }
+            } else if (target.classList.contains('sell-btn')) {
+                sellProduct(productIdStr);
+            }
+        });
+
+        productsGrid.addEventListener('change', (e) => {
+            if (e.target.classList.contains('quantity-input')) {
+                const productIdStr = e.target.getAttribute('data-id');
+                const newQty = parseInt(e.target.value) || 0;
+                updateProductQuantity(productIdStr, newQty);
+            }
+        });
+
+
+        function calculateSpentPercentage(product) {
+            if (!cart[product.id] || cart[product.id] === 0 || !selectedCelebrity || selectedCelebrity.netWorth === 0) return 0;
+            const totalSpentOnProduct = product.price * cart[product.id];
+            const percentOfNetWorth = (totalSpentOnProduct / selectedCelebrity.netWorth) * 100;
+            return Math.min(percentOfNetWorth, 100);
+        }
+
+        function showNoMoneyModal() {
+            playSound(errorSound);
+            noMoneyModal.classList.remove('hidden');
+        }
+
+        function buyProduct(productIdStr) {
+            const productId = parseInt(productIdStr);
+            const product = products.find(p => p.id === productId);
+            const { remaining } = updateMoney();
+
+            if (product.price <= remaining) {
+                cart[productId] = (cart[productId] || 0) + 1;
+                playSound(purchaseSound);
+                updateMoney();
+                updateProductCardUI(productId);
+                products.forEach(p => updateProductCardUI(p.id)); // Re-evaluate affordability for all
+            } else {
+                showNoMoneyModal();
+            }
+        }
+
+        function sellProduct(productIdStr) {
+            const productId = parseInt(productIdStr);
+            if (cart[productId] && cart[productId] > 0) {
+                cart[productId]--;
+                if (cart[productId] === 0) {
+                    delete cart[productId];
+                }
+                playSound(sellSound);
+                updateMoney();
+                updateProductCardUI(productId);
+                products.forEach(p => updateProductCardUI(p.id)); // Re-evaluate affordability for all
+            }
+        }
+
+        function updateProductQuantity(productIdStr, newQty) {
+            const productId = parseInt(productIdStr);
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const currentQty = cart[productId] || 0;
+            const moneyBeforeChange = selectedCelebrity.netWorth - Object.keys(cart).reduce((acc, id) => acc + (products.find(p=>p.id==id).price * (cart[id]||0)), 0);
+
+            const costForNewQty = product.price * newQty;
+            const costForCurrentQty = product.price * currentQty;
+            const costDifference = costForNewQty - costForCurrentQty;
+
+
+            if (newQty === 0) {
+                delete cart[productId];
+                playSound(sellSound);
+            } else if (newQty < currentQty || costDifference <= moneyBeforeChange ) {
+                cart[productId] = newQty;
+                playSound(newQty > currentQty ? purchaseSound : sellSound);
+            } else {
+                showNoMoneyModal();
+                const card = productsGrid.querySelector(`.product-card[data-product-id="${productId}"]`);
+                if (card) {
+                    const qtyInput = card.querySelector('.quantity-input');
+                    if(qtyInput) qtyInput.value = currentQty;
+                }
+                return;
+            }
+
+            updateMoney();
+            updateProductCardUI(productId);
+            products.forEach(p => updateProductCardUI(p.id)); // Re-evaluate affordability for all
+        }
+
+
+        function filterProducts(category) {
+            currentFilter = category;
+            categoryTabs.forEach(tab => tab.classList.toggle('active', tab.getAttribute('data-category') === category));
+
+            filteredProducts = (category === 'all')
+                ? [...products]
+                : products.filter(product => product.category === category);
+
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product =>
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            initProductsGrid();
+        }
+
+        function generateReceipt() {
+            if (Object.keys(cart).length === 0 || Object.values(cart).every(qty => qty === 0) ) {
+                alert("You haven't bought anything yet!");
+                return;
+            }
+            playSound(clickSound);
+
+            receiptItems.innerHTML = '';
+            receiptCelebrityName.textContent = selectedCelebrity.name + "'s";
+            let totalSpentInReceipt = 0;
+
+            const sortedItems = Object.keys(cart)
+                .map(productId => {
+                    const product = products.find(p => p.id === parseInt(productId));
+                    const quantity = cart[productId];
+                    if (!product || quantity === 0) return null; // Skip if product not found or quantity is zero
+                    const total = product.price * quantity;
+                    return { product, quantity, total };
+                })
+                .filter(item => item !== null) // Remove null items
+                .sort((a, b) => b.total - a.total);
+
+            sortedItems.forEach(item => {
+                const { product, quantity, total } = item;
+                totalSpentInReceipt += total;
+                const row = document.createElement('tr');
+                row.className = 'receipt-item-row';
+                row.innerHTML = `
+                    <td class="py-2 border-b border-gray-200"><div class="flex items-center"><img src="${product.image}" alt="${product.name}" class="w-12 h-12 object-cover rounded mr-2" loading="lazy"><span>${product.name}</span></div></td>
+                    <td class="py-2 border-b border-gray-200 text-right">${quantity}</td>
+                    <td class="py-2 border-b border-gray-200 text-right">${formatCurrency(product.price)}</td>
+                    <td class="py-2 border-b border-gray-200 text-right">${formatCurrency(total)}</td>
+                `;
+                receiptItems.appendChild(row);
+            });
+
+            const { remaining, percentSpent } = updateMoney();
+            receiptTotalSpent.textContent = formatCurrency(totalSpentInReceipt);
+            receiptGrandTotal.textContent = formatCurrency(totalSpentInReceipt);
+            receiptMoneyLeft.textContent = formatCurrency(remaining);
+            receiptPercentageSpent.textContent = percentSpent.toFixed(2) + '%';
+            receiptModal.classList.remove('hidden');
+        }
+
+        function filterCelebrities(filterType) {
+            celebFilterType = filterType;
+            celebFilters.forEach(filter => filter.classList.toggle('active', filter.getAttribute('data-filter') === filterType));
+            initCelebrityGrid();
+        }
+
+        function generateShareContent() {
+            let totalSpent = 0;
+            let itemsList = [];
+            Object.keys(cart).forEach(productId => {
+                const product = products.find(p => p.id === parseInt(productId));
+                const quantity = cart[productId];
+                if (quantity > 0 && product) {
+                    totalSpent += product.price * quantity;
+                    itemsList.push(`${quantity}x ${product.name}`);
+                }
+            });
+            const { percentSpent } = updateMoney();
+            const topItems = itemsList.slice(0, 3).join(', ') + (itemsList.length > 3 ? ' and more!' : '');
+
+
+            return {
+                text: `I just spent ${formatCurrency(totalSpent)} of ${selectedCelebrity.name}'s money (${percentSpent.toFixed(2)}%) on items like ${topItems}! How would you spend it? Check out:`,
+                url: 'https://moneyspend.free.nf/'
+            };
+        }
+
+        function shareOnFacebook() { const { text, url } = generateShareContent(); window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`, '_blank'); }
+        function shareOnTwitter() { const { text, url } = generateShareContent(); window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text + ' ' + url)}`, '_blank'); }
+        function shareOnTelegram() { const { text, url } = generateShareContent(); window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank'); }
+        function shareOnInstagram() { alert("To share on Instagram, take a screenshot of your receipt and post it!"); }
+        function shareOnWhatsApp() { const { text, url } = generateShareContent(); window.open(`https://wa.me/?text=${encodeURIComponent(text + '\n' + url)}`, '_blank'); }
+
+        function toggleSocialContact() {
+            socialContactVisible = !socialContactVisible;
+            if (socialContactVisible) {
+                socialContact.style.display = 'flex';
+                hamburgerIcon.classList.replace('fa-bars', 'fa-times');
+                setTimeout(() => { socialContact.style.opacity = '1'; }, 10);
+            } else {
+                socialContact.style.opacity = '0';
+                hamburgerIcon.classList.replace('fa-times', 'fa-bars');
+                setTimeout(() => { socialContact.style.display = 'none'; }, 500);
+            }
+        }
+
+        function handleScroll() {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50 && !hamburgerMenu.classList.contains('hidden')) {
+                hamburgerMenu.classList.add('hidden');
+                if (socialContactVisible) toggleSocialContact();
+            } else if (currentScroll <= 50 && hamburgerMenu.classList.contains('hidden')) {
+                hamburgerMenu.classList.remove('hidden');
+            }
+            lastScrollPosition = currentScroll;
+        }
+
+        // Event Listeners
+        startButton.addEventListener('click', () => { playSound(clickSound); welcomeScreen.classList.add('hidden'); celebrityScreen.classList.remove('hidden'); initCelebrityGrid(); });
+        backButton.addEventListener('click', () => { playSound(clickSound); mainScreen.classList.add('hidden'); celebrityScreen.classList.remove('hidden'); selectedCelebrity = null; cart = {}; window.scrollTo(0, 0); });
+        categoryTabs.forEach(tab => tab.addEventListener('click', () => { playSound(clickSound); filterProducts(tab.getAttribute('data-category')); }));
+        searchInput.addEventListener('input', () => filterProducts(currentFilter));
+        receiptButton.addEventListener('click', () => generateReceipt());
+        closeReceiptBtn.addEventListener('click', () => { playSound(clickSound); receiptModal.classList.add('hidden'); shareOptions.classList.add('hidden'); });
+        shareBtn.addEventListener('click', () => { playSound(clickSound); shareOptions.classList.toggle('hidden'); });
+        facebookShare.addEventListener('click', () => { playSound(clickSound); shareOnFacebook(); });
+        twitterShare.addEventListener('click', () => { playSound(clickSound); shareOnTwitter(); });
+        telegramShare.addEventListener('click', () => { playSound(clickSound); shareOnTelegram(); });
+        instagramShare.addEventListener('click', () => { playSound(clickSound); shareOnInstagram(); });
+        whatsappShare.addEventListener('click', () => { playSound(clickSound); shareOnWhatsApp(); });
+        celebFilters.forEach(filter => filter.addEventListener('click', () => { playSound(clickSound); filterCelebrities(filter.getAttribute('data-filter')); }));
+        hamburgerMenu.addEventListener('click', () => { playSound(clickSound); toggleSocialContact(); });
+        closeNoMoneyBtn.addEventListener('click', () => { playSound(clickSound); noMoneyModal.classList.add('hidden'); });
+        okNoMoneyBtn.addEventListener('click', () => { playSound(clickSound); noMoneyModal.classList.add('hidden'); });
+        window.addEventListener('click', (e) => {
+            if (e.target === receiptModal) { receiptModal.classList.add('hidden'); shareOptions.classList.add('hidden'); }
+            if (e.target === noMoneyModal) { noMoneyModal.classList.add('hidden'); }
+        });
+        window.addEventListener('scroll', handleScroll);
+
+        // Page loading optimization & Initial Setup
+        document.addEventListener('DOMContentLoaded', function() {
+            if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+
+            const preloadImages = () => {
+                const preloadUrls = celebrities.slice(0, 3).map(c => c.image);
+                products.slice(0,5).map(p => p.image).forEach(url => preloadUrls.push(url));
+                preloadUrls.forEach(url => { const img = new Image(); img.src = url; });
+            };
+            preloadImages();
+        });
+    </script>
+</body>
+</html>
